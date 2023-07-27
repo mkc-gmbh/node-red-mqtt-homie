@@ -1,0 +1,34 @@
+<script type="text/html" data-help-name="mkc-mqtt-in">
+	<p>Connecting to an MKC MQTT device and subscribing to messages.</p>
+	<p>This corresponds to the <a href="https://homieiot.github.io/">Homie convention</a> for IoT/M2M</p>
+
+	<p>Multiple MKC MQTT nodes (-device, -in and -out) can share the same connection if required.</p>
+
+	<h3>Outputs (Status)</h3>
+    <dl class="message-properties">
+        <dt>topic <span class="property-type">string</span></dt>
+		<dd>Device identifierer.</dd>	
+        <dt>payload <span class="property-type">boolean</span></dt>
+		<dd>State of the device.</dd>
+        <dt>node <span class="property-type">object</span></dt>
+		<dd>Object with the current node attributes.</dd>
+        <dt>property <span class="property-type">object</span></dt>
+		<dd>Object with the current property attributes.</dd>
+    </dl>
+
+	<h3>Outputs (Event)</h3>
+    <dl class="message-properties">
+        <dt>topic <span class="property-type">string</span></dt>
+		<dd>name of the node.</dd>	
+        <dt>payload <span class="property-type">boolean</span></dt>
+		<dd>Value of the property<.</dd>
+        <dt>enabled <span class="property-type">boolean</span></dt>
+		<dd>State of the device.</dd>
+    </dl>
+
+	<h3>Details</h3>
+	<p><code>MKC Homie</code> This node requires a connection to a MKC-MQTT configuration node, which 
+	can be selected via the selection list. A new connection is created by clicking the pencil icon.</p>	
+	<p><code>Node</code> The Node topic, without / as a hierarchy separator.</p>	
+	<p><code>Property</code> The Property topic, without / as a hierarchy separator.</p>	
+</script>

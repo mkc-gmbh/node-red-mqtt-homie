@@ -1,0 +1,185 @@
+[
+    {
+        "id": "3ef3bdab.670e52",
+        "type": "subflow",
+        "name": "mkc-mqtt-in-2-label",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "ce65f88d.ed47b"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "ce65f88d.ed47b",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "ce65f88d.ed47b",
+        "type": "function",
+        "z": "3ef3bdab.670e52",
+        "name": "",
+        "func": "if( msg.node && msg.property)\n{\n    let myTopic = msg.node[\"$name\"];\n    \n    let myPayload = myTopic;\n    if( msg.property[\"$unit\"].length > 0)\n    {\n        if(msg.property[\"$unit\"] === \"Celsius\")\n        {\n            msg.property[\"$unit\"] = \"&degC\";\n        }\n        myPayload += \"&nbsp;[\" + msg.property[\"$unit\"] + \"]\";\n    }\n    myPayload += \"</br>\"+msg.property[\"$name\"];\n    \n    let myEnable = msg.payload;\n\n    msg = {\"topic\":myTopic, \"payload\":myPayload, \"enabled\":myEnable};\n}\nelse\n{\n    msg = null;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "24cac346.bb5e8c",
+        "type": "ui_text",
+        "z": "fd54d535.7bf72",
+        "group": "f109b327.ac86d",
+        "order": 2,
+        "width": 3,
+        "height": 1,
+        "name": "DI0",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "smallLabel",
+        "x": 570,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "cf1ad60a.aa7be8",
+        "type": "ui_switch",
+        "z": "fd54d535.7bf72",
+        "name": "DI0",
+        "label": "",
+        "tooltip": "",
+        "group": "f109b327.ac86d",
+        "order": 4,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 330,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c8b4a6eb.b68078",
+        "type": "mkc-mqtt-in",
+        "z": "fd54d535.7bf72",
+        "mkcHomie": "48aa7e56.a54cc8",
+        "nodeID": "0",
+        "propertyID": "pin",
+        "name": "",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "45c0f.be6fbbf14"
+            ],
+            [
+                "cf1ad60a.aa7be8"
+            ]
+        ]
+    },
+    {
+        "id": "45c0f.be6fbbf14",
+        "type": "subflow:3ef3bdab.670e52",
+        "z": "fd54d535.7bf72",
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [
+                "24cac346.bb5e8c"
+            ]
+        ]
+    },
+    {
+        "id": "f109b327.ac86d",
+        "type": "ui_group",
+        "name": "IOCARD-248286",
+        "tab": "77d6707e.bc87d8",
+        "order": 1,
+        "disp": true,
+        "width": 5,
+        "collapse": false
+    },
+    {
+        "id": "48aa7e56.a54cc8",
+        "type": "mkc-mqtt-config",
+        "broker": "a8ffc6f.3ff21b8",
+        "rootID": "mkc",
+        "mDNS": "IOCARD-248286.local",
+        "name": ""
+    },
+    {
+        "id": "77d6707e.bc87d8",
+        "type": "ui_tab",
+        "name": "MQTT",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a8ffc6f.3ff21b8",
+        "type": "mqtt-broker",
+        "name": "mosquitto-localhost",
+        "broker": "localhost",
+        "port": "49883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

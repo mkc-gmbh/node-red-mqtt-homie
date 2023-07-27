@@ -1,0 +1,17 @@
+<script type="text/html" data-help-name="mkc-mqtt-out">
+	<p>Connecting to an MKC MQTT device and  and publishes messages. This correspond to the node/property 
+	attributes of the <a href="https://homieiot.github.io/">homie convention</a> v4.0.0.</p>
+
+	<p>Multiple MKC MQTT nodes (-device, -in and -out) can share the same connection if required.</p>
+
+	<h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string | boolean | number</span></dt>
+		<dd>The payload to publish.</dd>
+    </dl>
+	<h3>Details</h3>
+	<p><code>MKC Homie</code> This node requires a connection to a MKC-MQTT configuration node, which 
+	can be selected via the selection list. A new connection is created by clicking the pencil icon.</p>	
+	<p><code>Node</code> The Node topic, without / as a hierarchy separator.</p>	
+	<p><code>Property</code> The Property topic, without / as a hierarchy separator.</p>	
+</script>

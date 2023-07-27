@@ -1,0 +1,21 @@
+<script type="text/html" data-help-name="mkc-mqtt-device">
+	<p>Verbindungsherstellung zu einem MKC MQTT Gerät und Abonnement von Nachrichten.</p>
+	<p>Diese entsprechen der <a href="https://homieiot.github.io/">Homie convention</a> für IoT/M2M</p>
+
+	<p>Mehrere MKC MQTT Nodes (-device, -in und -out) können bei Bedarf dieselbe Verbindung nutzen.</p>
+	
+	<h3>Ausgangsdaten</h3>
+    <dl class="message-properties">
+        <dt>topic <span class="property-type">string</span></dt>
+		<dd>Geräte-ID des Gerätes.</dd>	
+        <dt>payload <span class="property-type">boolean</span></dt>
+		<dd>Status des Gerätes.</dd>
+        <dt>device<span class="property-type">object</span></dt>
+		<dd>Objekt mit den aktuellen Geräteattributen</dd>
+    </dl>
+	
+	<h3>Details</h3>
+	<p><code>MKC Homie</code> Dieser Node erfordert eine Verbindung zu einem MKC-MQTT Konfigurationsnode, 
+	der über die Auswahlliste selektiert werden kann. Eine neue Verbindung wird durch Klicken auf das Stiftsymbol erstellt.</p>	
+	
+</script>

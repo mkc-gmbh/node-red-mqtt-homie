@@ -1,0 +1,170 @@
+[
+    {
+        "id": "3ef3bdab.670e52",
+        "type": "subflow",
+        "name": "mkc-mqtt-in-2-label",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "ce65f88d.ed47b"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "ce65f88d.ed47b",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "ce65f88d.ed47b",
+        "type": "function",
+        "z": "3ef3bdab.670e52",
+        "name": "",
+        "func": "if( msg.node && msg.property)\n{\n    let myTopic = msg.node[\"$name\"];\n    \n    let myPayload = myTopic;\n    if( msg.property[\"$unit\"].length > 0)\n    {\n        if(msg.property[\"$unit\"] === \"Celsius\")\n        {\n            msg.property[\"$unit\"] = \"&degC\";\n        }\n        myPayload += \"&nbsp;[\" + msg.property[\"$unit\"] + \"]\";\n    }\n    myPayload += \"</br>\"+msg.property[\"$name\"];\n    \n    let myEnable = msg.payload;\n\n    msg = {\"topic\":myTopic, \"payload\":myPayload, \"enabled\":myEnable};\n}\nelse\n{\n    msg = null;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "395c1b8f.379044",
+        "type": "ui_text",
+        "z": "99529523.85b82",
+        "group": "40a6428d.2c1c04",
+        "order": 2,
+        "width": 3,
+        "height": 1,
+        "name": "AI0-Label",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "smallLabel",
+        "x": 580,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "7d6edb84.a2a04c",
+        "type": "mkc-mqtt-in",
+        "z": "99529523.85b82",
+        "mkcHomie": "a577ebe3.1ef8c",
+        "nodeID": "2",
+        "propertyID": "pin",
+        "name": "",
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "43c7f01d.b6a048"
+            ],
+            [
+                "2265a06.28bc76"
+            ]
+        ]
+    },
+    {
+        "id": "43c7f01d.b6a048",
+        "type": "subflow:3ef3bdab.670e52",
+        "z": "99529523.85b82",
+        "x": 380,
+        "y": 400,
+        "wires": [
+            [
+                "395c1b8f.379044"
+            ]
+        ]
+    },
+    {
+        "id": "2265a06.28bc76",
+        "type": "ui_text",
+        "z": "99529523.85b82",
+        "group": "40a6428d.2c1c04",
+        "order": 3,
+        "width": 2,
+        "height": 1,
+        "name": "AI0",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "className": "smallLabel",
+        "x": 330,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "40a6428d.2c1c04",
+        "type": "ui_group",
+        "name": "IOCARD-207891",
+        "tab": "77d6707e.bc87d8",
+        "order": 3,
+        "disp": true,
+        "width": 5,
+        "collapse": false
+    },
+    {
+        "id": "a577ebe3.1ef8c",
+        "type": "mkc-mqtt-config",
+        "broker": "a8ffc6f.3ff21b8",
+        "rootID": "mkc",
+        "mDNS": "IOCARD-207891",
+        "name": ""
+    },
+    {
+        "id": "77d6707e.bc87d8",
+        "type": "ui_tab",
+        "name": "MQTT",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a8ffc6f.3ff21b8",
+        "type": "mqtt-broker",
+        "name": "mosquitto-localhost",
+        "broker": "localhost",
+        "port": "49883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

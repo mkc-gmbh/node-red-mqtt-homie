@@ -1,0 +1,35 @@
+<script type="text/html" data-help-name="mkc-mqtt-in">
+	<p>Verbindungsherstellung zu einem MKC MQTT Gerät und Abonnement von Nachrichten. Diese
+	entsprechen den Node/Property Attributen der <a href="https://homieiot.github.io/">homie convention</a> v4.0.0.</p>
+
+	<p>Mehrere MKC MQTT Nodes (-device, -in und -out) können bei Bedarf dieselbe Verbindung nutzen.</p>
+	
+	<h3>Ausgangsdaten (Status)</h3>
+    <dl class="message-properties">
+        <dt>topic <span class="property-type">string</span></dt>
+		<dd>Topic der empfangenen Nachricht.</dd>	
+        <dt>payload <span class="property-type">boolean</span></dt>
+		<dd>Status des Gerätes.</dd>
+        <dt>node <span class="property-type">object</span></dt>
+		<dd>Objekt mit den aktuellen Nodeattributen</dd>
+        <dt>property <span class="property-type">object</span></dt>
+		<dd>Objekt mit den aktuellen Propertyattributen</dd>
+    </dl>
+
+	<h3>Ausgangsdaten (Event)</h3>
+    <dl class="message-properties">
+        <dt>topic <span class="property-type">string</span></dt>
+		<dd>Name des Nodes.</dd>	
+        <dt>payload <span class="property-type">boolean</span></dt>
+		<dd>Wert des Properties.</dd>
+        <dt>enabled <span class="property-type">boolean</span></dt>
+		<dd>Status des Gerätes</dd>
+    </dl>
+
+	<h3>Details</h3>
+	<p><code>MKC Homie</code> Dieser Node erfordert eine Verbindung zu einem MKC-MQTT Konfigurationsnode, 
+	der über die Auswahlliste selektiert werden kann. Eine neue Verbindung wird durch Klicken auf das Stiftsymbol erstellt.</p>	
+	<p><code>Node</code> Definert den MQTT "Node" Topic.</p>
+	<p><code>Property</code> Definert den MQTT "Property" Topic.</p>
+	
+</script>

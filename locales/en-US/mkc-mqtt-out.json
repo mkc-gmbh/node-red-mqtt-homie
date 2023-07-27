@@ -1,0 +1,9 @@
+{
+    "mkc-mqtt-out": {
+        "connected":    "Connected",
+        "disconnected": "Disconnected",
+        "label": {
+            "name": "Name"
+        }
+    }
+}

@@ -1,0 +1,38 @@
+<script type="text/javascript">
+
+	RED.nodes.registerType("mkc-mqtt-config", {
+	
+		category: "config",
+		defaults: {
+			
+			broker:   { value: "",    required: true, type: "mqtt-broker"},
+			rootID:   { value: "mkc", required: true, validate: RED.validators.regex(/^(#$|(\+|[^+#]*)(\/(\+|[^+#]*))*(\/(\+|#|[^+#]*))?$)/)},
+			deviceID: { value: "",    required: true, validate: RED.validators.regex(/^(#$|(\+|[^+#]*)(\/(\+|[^+#]*))*(\/(\+|#|[^+#]*))?$)/)},
+			name:     { value: "" }
+		},
+        
+		label: function() {
+		
+			return this.name || this.deviceID;
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="mkc-mqtt-config" id="form">
+	<div class="form-row">
+		<label for="node-config-input-broker"><i class="fa fa-globe"></i> <span data-i18n="mkc-mqtt-config.label.broker"></span></label>
+		<input id="node-config-input-broker" />
+	</div>
+	<div class="form-row">
+		<label for="node-config-input-rootID"><i class="fa fa-pencil"></i> Root</label>
+		<input type="text" id="node-config-input-rootID" />
+	</div>
+	<div class="form-row">
+		<label for="node-config-input-deviceID"><i class="fa fa-pencil"></i> Device</label>
+		<input type="text" id="node-config-input-deviceID" placeholder="device-123456" />
+	</div>
+	<div class="form-row">
+		<label for="node-config-input-name"><i class="fa fa-pencil"></i> <span data-i18n="mkc-mqtt-config.label.name"></span></label>
+		<input type="text" id="node-config-input-name" />
+	</div>
+</script>

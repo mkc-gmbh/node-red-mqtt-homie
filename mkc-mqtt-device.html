@@ -1,0 +1,70 @@
+<script type="text/javascript">
+
+	RED.nodes.registerType("mkc-mqtt-device", {
+	
+		category: "mkc",
+		color: "#90abf5",
+        icon: "bridge.svg",
+		//icon: "font-awesome/fa-bolt",
+
+		defaults: {
+			
+			mkcHomie: { value: "", type: "mkc-mqtt-config", required: true },
+			name:     { value: "" }
+		},
+		
+		inputs:  0,
+		outputs: 1,
+		outputLabels: ["Status"],
+		
+		// outputLabels: ["Status", "Event"],
+		
+        labelStyle: function()
+		{
+            return this.name ? "node_label_italic" : "";
+        },
+
+		label: function ()
+		{
+			let myName = "";
+
+			let homie = RED.nodes.node( this.mkcHomie);
+			if (homie) 
+			{
+				if( homie.name)
+				{
+					myName = homie.name;
+				}
+				else
+				{
+					if( homie.mDNS)
+					{
+						const mDNSArr = homie.mDNS.split(".");
+						myName = mDNSArr[0];
+					}
+				}
+			}
+
+			return this.name || myName;
+		},
+	
+		oneditprepare: function ()
+		{
+			$("#node-input-mkcHomie").change(() => 
+			{
+			});
+		}
+    });
+	
+</script>
+
+<script type="text/html" data-template-name="mkc-mqtt-device" id="form">
+	<div class="form-row">
+		<label for="node-input-mkcHomie"><i class="fa fa-cog"></i> MKC Homie</label>
+		<input id="node-input-mkcHomie" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-pencil"></i> <span data-i18n="mkc-mqtt-device.label.name"></span></label>
+		<input type="text" id="node-input-name" />
+	</div>
+</script>

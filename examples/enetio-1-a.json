@@ -1,0 +1,375 @@
+[
+    {
+        "id": "3ef3bdab.670e52",
+        "type": "subflow",
+        "name": "mkc-mqtt-in-2-label",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "ce65f88d.ed47b"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "ce65f88d.ed47b",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "ce65f88d.ed47b",
+        "type": "function",
+        "z": "3ef3bdab.670e52",
+        "name": "",
+        "func": "if( msg.node && msg.property)\n{\n    let myTopic = msg.node[\"$name\"];\n    \n    let myPayload = myTopic;\n    if( msg.property[\"$unit\"].length > 0)\n    {\n        if(msg.property[\"$unit\"] === \"Celsius\")\n        {\n            msg.property[\"$unit\"] = \"&degC\";\n        }\n        myPayload += \"&nbsp;[\" + msg.property[\"$unit\"] + \"]\";\n    }\n    myPayload += \"</br>\"+msg.property[\"$name\"];\n    \n    let myEnable = msg.payload;\n\n    msg = {\"topic\":myTopic, \"payload\":myPayload, \"enabled\":myEnable};\n}\nelse\n{\n    msg = null;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5136b4ad.45a8ac",
+        "type": "subflow",
+        "name": "mkc-mqtt-device-2-label",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "710b65dc.47286c"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "710b65dc.47286c",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "710b65dc.47286c",
+        "type": "function",
+        "z": "5136b4ad.45a8ac",
+        "name": "",
+        "func": "let color = \"red\";\nlet state = msg.device[\"$state\"];\nif( state === \"ready\")\n{\n    color=\"green\";\n}\nelse if( state === \"init\")\n{\n    color = \"yellow\";\n}\nnode.status({fill:color,shape:\"dot\",text:state});\n\nlet myPayload = '<i class=\"fa fa-wifi nr-dashboard-error\"></i>';\nif (msg.payload === true)\n{\n    myPayload = '<i class=\"fa fa-wifi nr-dashboard-ok\"></i>';\n} \n\nmsg = { \"topic\":msg.device[\"$name\"], \"payload\":myPayload};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "faf0548a03117d49",
+        "type": "mkc-mqtt-device",
+        "z": "4f85070d.61abc",
+        "mkcHomie": "93908ab5.657968",
+        "name": "",
+        "x": 120,
+        "y": 40,
+        "wires": [
+            [
+                "6b44bb909daea0fc"
+            ]
+        ]
+    },
+    {
+        "id": "e267d50d489d903f",
+        "type": "ui_text",
+        "z": "4f85070d.61abc",
+        "group": "c70fa4b0fa08d64b",
+        "order": 4,
+        "width": 4,
+        "height": 1,
+        "name": "DO0",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "smallLabel",
+        "x": 510,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "64258ff1156e5a2a",
+        "type": "ui_switch",
+        "z": "4f85070d.61abc",
+        "name": "DO0",
+        "label": "",
+        "tooltip": "",
+        "group": "c70fa4b0fa08d64b",
+        "order": 5,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 270,
+        "y": 220,
+        "wires": [
+            [
+                "efe3c2528e18c577"
+            ]
+        ]
+    },
+    {
+        "id": "aaf1aa559aad2168",
+        "type": "mkc-mqtt-in",
+        "z": "4f85070d.61abc",
+        "mkcHomie": "93908ab5.657968",
+        "nodeID": "1",
+        "propertyID": "pin",
+        "name": "",
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "8a22522761bc6e07"
+            ],
+            [
+                "64258ff1156e5a2a"
+            ]
+        ]
+    },
+    {
+        "id": "efe3c2528e18c577",
+        "type": "mkc-mqtt-out",
+        "z": "4f85070d.61abc",
+        "mkcHomie": "93908ab5.657968",
+        "nodeID": "1",
+        "propertyID": "pin",
+        "name": "",
+        "x": 530,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "05ec93b8d03163b8",
+        "type": "mkc-mqtt-in",
+        "z": "4f85070d.61abc",
+        "mkcHomie": "93908ab5.657968",
+        "nodeID": "0",
+        "propertyID": "pin",
+        "name": "",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "aaeec3d74c6dfb43"
+            ],
+            [
+                "3980bb75f3fe43d4"
+            ]
+        ]
+    },
+    {
+        "id": "1c8fd105a496720d",
+        "type": "ui_text",
+        "z": "4f85070d.61abc",
+        "group": "c70fa4b0fa08d64b",
+        "order": 2,
+        "width": 4,
+        "height": 1,
+        "name": "DI0",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "smallLabel",
+        "x": 510,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "3980bb75f3fe43d4",
+        "type": "ui_switch",
+        "z": "4f85070d.61abc",
+        "name": "DI0",
+        "label": "",
+        "tooltip": "",
+        "group": "c70fa4b0fa08d64b",
+        "order": 3,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 270,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "97b0247c6d5182cf",
+        "type": "ui_text",
+        "z": "4f85070d.61abc",
+        "group": "c70fa4b0fa08d64b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "State",
+        "label": "{{msg.topic}}",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 510,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "6b44bb909daea0fc",
+        "type": "subflow:5136b4ad.45a8ac",
+        "z": "4f85070d.61abc",
+        "x": 330,
+        "y": 40,
+        "wires": [
+            [
+                "97b0247c6d5182cf"
+            ]
+        ]
+    },
+    {
+        "id": "aaeec3d74c6dfb43",
+        "type": "subflow:3ef3bdab.670e52",
+        "z": "4f85070d.61abc",
+        "name": "",
+        "x": 310,
+        "y": 80,
+        "wires": [
+            [
+                "1c8fd105a496720d"
+            ]
+        ]
+    },
+    {
+        "id": "8a22522761bc6e07",
+        "type": "subflow:3ef3bdab.670e52",
+        "z": "4f85070d.61abc",
+        "name": "",
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "e267d50d489d903f"
+            ]
+        ]
+    },
+    {
+        "id": "93908ab5.657968",
+        "type": "mkc-mqtt-config",
+        "broker": "a8ffc6f.3ff21b8",
+        "rootID": "mkc",
+        "deviceID": "enetio-170f04",
+        "name": ""
+    },
+    {
+        "id": "c70fa4b0fa08d64b",
+        "type": "ui_group",
+        "name": "enetio-170f04.local",
+        "tab": "6cd4c40b5d4bab60",
+        "order": 1,
+        "disp": true,
+        "width": "5",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a8ffc6f.3ff21b8",
+        "type": "mqtt-broker",
+        "name": "mosquitto-localhost",
+        "broker": "localhost",
+        "port": "49883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "6cd4c40b5d4bab60",
+        "type": "ui_tab",
+        "name": "eNetIO-1-a",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]

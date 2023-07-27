@@ -1,0 +1,35 @@
+{
+    "name": "@mkc-gmbh/node-red-mqtt-homie",
+    "version": "1.0.1",
+    "description": "MKC MQTT HOMIE protocol helper for Node-Red.",
+    "author": "MKC@GW",
+    "license": "MIT",
+    "node-red": {
+        "version": ">=1.0.1",
+        "nodes": {
+            "mkc-mqtt-config": "mkc-mqtt-config.js",
+            "mkc-mqtt-device": "mkc-mqtt-device.js",
+            "mkc-mqtt-in": "mkc-mqtt-in.js",
+            "mkc-mqtt-out": "mkc-mqtt-out.js"
+        }
+    },
+	"engines": {
+		"node": ">=14.0.0"
+	},
+    "keywords": [
+		"node-red",
+        "mkc",
+		"eNetIO",
+		"eNetCube",
+		"eNetVario",
+		"eNetMaxi",
+		"eNetMini",
+		"homie",
+        "mqtt"
+    ],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mkc-gmbh/node-red-mqtt-homie"
+	},
+	"homepage": "https://github.com/mkc-gmbh/node-red-mqtt-homie#readme"
+}

@@ -1,0 +1,148 @@
+[
+    {
+        "id": "5136b4ad.45a8ac",
+        "type": "subflow",
+        "name": "mkc-mqtt-device-2-label",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "710b65dc.47286c"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "710b65dc.47286c",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "710b65dc.47286c",
+        "type": "function",
+        "z": "5136b4ad.45a8ac",
+        "name": "",
+        "func": "let color = \"red\";\nlet state = msg.device[\"$state\"];\nif( state === \"ready\")\n{\n    color=\"green\";\n}\nelse if( state === \"init\")\n{\n    color = \"yellow\";\n}\nnode.status({fill:color,shape:\"dot\",text:state});\n\nlet myPayload = '<i class=\"fa fa-wifi nr-dashboard-error\"></i>';\nif (msg.payload === true)\n{\n    myPayload = '<i class=\"fa fa-wifi nr-dashboard-ok\"></i>';\n} \n\nmsg = { \"topic\":msg.device[\"$name\"], \"payload\":myPayload};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "798b9cde.ec20f4",
+        "type": "mkc-mqtt-device",
+        "z": "fd54d535.7bf72",
+        "mkcHomie": "48aa7e56.a54cc8",
+        "name": "",
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "f1e73ef6.ad025"
+            ]
+        ]
+    },
+    {
+        "id": "db7d0d13.6a3008",
+        "type": "ui_text",
+        "z": "fd54d535.7bf72",
+        "group": "f109b327.ac86d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "State",
+        "label": "{{msg.topic}}",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 590,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f1e73ef6.ad025",
+        "type": "subflow:5136b4ad.45a8ac",
+        "z": "fd54d535.7bf72",
+        "x": 390,
+        "y": 60,
+        "wires": [
+            [
+                "db7d0d13.6a3008"
+            ]
+        ]
+    },
+    {
+        "id": "48aa7e56.a54cc8",
+        "type": "mkc-mqtt-config",
+        "broker": "a8ffc6f.3ff21b8",
+        "rootID": "mkc",
+        "mDNS": "IOCARD-248286.local",
+        "name": ""
+    },
+    {
+        "id": "f109b327.ac86d",
+        "type": "ui_group",
+        "name": "IOCARD-248286",
+        "tab": "77d6707e.bc87d8",
+        "order": 1,
+        "disp": true,
+        "width": 5,
+        "collapse": false
+    },
+    {
+        "id": "a8ffc6f.3ff21b8",
+        "type": "mqtt-broker",
+        "name": "mosquitto-localhost",
+        "broker": "localhost",
+        "port": "49883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "77d6707e.bc87d8",
+        "type": "ui_tab",
+        "name": "MQTT",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]

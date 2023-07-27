@@ -1,0 +1,9 @@
+{
+    "mkc-mqtt-config": {
+        "closed": "Node closed",
+        "label": {
+            "name":   "Name",
+			"broker": "Broker"
+        }
+    }
+}

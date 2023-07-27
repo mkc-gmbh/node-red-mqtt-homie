@@ -1,0 +1,10 @@
+{
+    "mkc-mqtt-in": {
+        "connected":    "verbunden",
+        "disconnected": "getrennt",
+        "notexist":     "existiert nicht",
+        "label": {
+            "name": "Name"
+        }
+    }
+}

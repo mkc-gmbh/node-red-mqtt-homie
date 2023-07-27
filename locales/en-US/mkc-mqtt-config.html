@@ -1,0 +1,18 @@
+<script type="text/html" data-help-name="mkc-mqtt-config">
+	<p>MKC MQTT config helper for Node-Red.</p>
+	
+	<p>The structure of published data, the layout of the topics and their relations are not defined in the MQTT specification itself. The data 
+		as well as the topics to which the data is sent to can be arbitrary.</p>
+	<p>Therefore a structure of data and topics has to be defined, such that it matches the purpose of the data, is still lightweight and is 
+		machine (and in best case human) readable.</p>
+	<p>For this purpose MKC devices uses the <a href="https://homieiot.github.io/">homie convention</a> v4.0.0.
+	You can find more information on our <a href="https://www.mkc-gmbh.de/doxygen/documentation/index.html">Online-Documentation</a></p>
+
+	<p>This configuration creates a connection to a broker, which can be used by the MKC MQTT nodes (-device, -in and -out).</p>
+	
+	<h3>Details</h3>
+	<p><code>Broker</code> This node requires a connection to a MQTT broker to be configured. This is configured by 
+	clicking the pencil icon.</p>	
+	<p><code>Root</code> The ROOT topic, without / as a hierarchy separator.</p>	
+	<p><code>Device</code> The device topic, without / as a hierarchy separator. You will find it as part of the mDNS name at the product label.</p>
+</script>
