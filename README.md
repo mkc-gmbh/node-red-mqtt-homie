@@ -4,13 +4,12 @@ Integrate [MKC](https://www.mkc-gmbh.de) products into the Node-RED application 
 
 ## Installation
 
-The easiest way to install the nodes is to use the Manage palette option in the Node-RED editor menu. In the Install tab you can search for the @MKC/mqtt-homie package and click install. Once the installation is complete the nodes are available.
+The easiest way to install the nodes is to use the Manage palette option in the Node-RED editor menu. In the Install tab you can search for the @mkc-gnbh/mqtt-homie package and click install. Once the installation is complete the nodes are available.
 
 Alternatively you can install the nodes in your node-RED configuration folder
 
 ```bash
-cd ~/.node-red
-npm install ~/node-red-mqtt-homie
+npm install @mkc-gmbh/node-red-mqtt-homie
 ```
 
 The nodes will be available after a restart of the Node-RED apllication.
@@ -25,36 +24,12 @@ You can use the generic nodes to access every device. First create a configurati
 
 ## Examples
 
-Note: Don't forget to change the MQTT configuration nodes to use these examples.
-
-### eNetIO-1-a
-
-![eNetIO-1-a][def2]
-
-### Analog input
-
-![Analog input][def3]
-
-### Digital input
-
-![Digital input][def6]
-
-### Digital output
-
-![Digital output][def4]
-
-### Device state
-
-![device state][def5]
+[EXAMPLES][def2]
 
 ## License
 
-MKC under [MIT][def7].
+MKC under [MIT][def3].
 
 [def1]: ./CHANGELOG.md
-[def2]: examples/enetio-1-a.png "eNetIO-1-a"
-[def3]: examples/mkc-mqtt-analog-in.png "Analog input"
-[def4]: examples/mkc-mqtt-digital-out.png "Digital output"
-[def5]: examples/mkc-mqtt-state.png "Device state"
-[def6]: examples/mkc-mqtt-digital-in.png "Digital input"
-[def7]: ./LICENSE
+[def2]: ./EXAMPLES.md
+[def3]: ./LICENSE
